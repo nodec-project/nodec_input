@@ -6,7 +6,6 @@
 #include <nodec/macros.hpp>
 #include <nodec/signals/signal.hpp>
 #include <nodec/vector2.hpp>
-#include <nodec/logging.hpp>
 
 namespace nodec_input {
 namespace mouse {
