@@ -1,7 +1,10 @@
 #ifndef NODEC_INPUT__KEYBOARD__KEY_HPP_
 #define NODEC_INPUT__KEYBOARD__KEY_HPP_
 
+#include <array>
+#include <cstdint>
 #include <sstream>
+#include <unordered_map>
 
 namespace nodec_input {
 namespace keyboard {
@@ -15,7 +18,7 @@ namespace keyboard {
 //  Unity:
 //      * https://docs.unity3d.com/2021.2/Documentation/ScriptReference/KeyCode.html
 
-enum class Key {
+enum class Key : std::uint32_t {
     None = 0x00,
 
     Return = 0x0D,
@@ -90,88 +93,95 @@ enum class Key {
     F22 = 0x85,
     F23 = 0x86,
     F24 = 0x87,
+};
 
+struct KeyNameMap {
+    static const char *get_name(Key key) {
+        static const std::unordered_map<Key, const char *> key_name_map{
+            {Key::None, "None"},
+            {Key::Return, "Return"},
+            {Key::Escape, "Escape"},
+
+            {Key::Space, "Space"},
+
+            {Key::LeftArrow, "LeftArrow"},
+            {Key::UpArrow, "UpArrow"},
+            {Key::RightArrow, "RightArrow"},
+            {Key::DownArrow, "DownArrow"},
+
+            {Key::Alpha0, "Alpha0"},
+            {Key::Alpha1, "Alpha1"},
+            {Key::Alpha2, "Alpha2"},
+            {Key::Alpha3, "Alpha3"},
+            {Key::Alpha4, "Alpha4"},
+            {Key::Alpha5, "Alpha5"},
+            {Key::Alpha6, "Alpha6"},
+            {Key::Alpha7, "Alpha7"},
+            {Key::Alpha8, "Alpha8"},
+            {Key::Alpha9, "Alpha9"},
+
+            {Key::A, "A"},
+            {Key::B, "B"},
+            {Key::C, "C"},
+            {Key::D, "D"},
+            {Key::E, "E"},
+            {Key::F, "F"},
+            {Key::G, "G"},
+            {Key::H, "H"},
+            {Key::I, "I"},
+            {Key::J, "J"},
+            {Key::K, "K"},
+            {Key::L, "L"},
+            {Key::M, "M"},
+            {Key::N, "N"},
+            {Key::O, "O"},
+            {Key::P, "P"},
+            {Key::Q, "Q"},
+            {Key::R, "R"},
+            {Key::S, "S"},
+            {Key::T, "T"},
+            {Key::U, "U"},
+            {Key::V, "V"},
+            {Key::W, "W"},
+            {Key::X, "X"},
+            {Key::Y, "Y"},
+            {Key::Z, "Z"},
+
+            {Key::F1, "F1"},
+            {Key::F2, "F2"},
+            {Key::F3, "F3"},
+            {Key::F4, "F4"},
+            {Key::F5, "F5"},
+            {Key::F6, "F6"},
+            {Key::F7, "F7"},
+            {Key::F8, "F8"},
+            {Key::F9, "F9"},
+            {Key::F10, "F10"},
+            {Key::F11, "F11"},
+            {Key::F12, "F12"},
+            {Key::F13, "F13"},
+            {Key::F14, "F14"},
+            {Key::F15, "F15"},
+            {Key::F16, "F16"},
+            {Key::F17, "F17"},
+            {Key::F18, "F18"},
+            {Key::F19, "F19"},
+            {Key::F20, "F20"},
+            {Key::F21, "F21"},
+            {Key::F22, "F22"},
+            {Key::F23, "F23"},
+            {Key::F24, "F24"},
+        };
+        auto iter = key_name_map.find(key);
+        if (iter == key_name_map.end()) {
+            return "Unknown";
+        }
+        return iter->second;
+    }
 };
 
 inline std::ostream &operator<<(std::ostream &stream, const Key &key) {
-    switch (key) {
-    case Key::None: return stream << "None";
-
-    case Key::Return: return stream << "Return";
-    case Key::Escape: return stream << "Escape";
-
-    case Key::Space: return stream << "Space";
-
-    case Key::LeftArrow: return stream << "LeftArrow";
-    case Key::UpArrow: return stream << "UpArrow";
-    case Key::RightArrow: return stream << "RightArrow";
-    case Key::DownArrow: return stream << "DownArrow";
-
-    case Key::Alpha0: return stream << "Alpha0";
-    case Key::Alpha1: return stream << "Alpha1";
-    case Key::Alpha2: return stream << "Alpha2";
-    case Key::Alpha3: return stream << "Alpha3";
-    case Key::Alpha4: return stream << "Alpha4";
-    case Key::Alpha5: return stream << "Alpha5";
-    case Key::Alpha6: return stream << "Alpha6";
-    case Key::Alpha7: return stream << "Alpha7";
-    case Key::Alpha8: return stream << "Alpha8";
-    case Key::Alpha9: return stream << "Alpha9";
-
-    case Key::A: return stream << "A";
-    case Key::B: return stream << "B";
-    case Key::C: return stream << "C";
-    case Key::D: return stream << "D";
-    case Key::E: return stream << "E";
-    case Key::F: return stream << "F";
-    case Key::G: return stream << "G";
-    case Key::H: return stream << "H";
-    case Key::I: return stream << "I";
-    case Key::J: return stream << "J";
-    case Key::K: return stream << "K";
-    case Key::L: return stream << "L";
-    case Key::M: return stream << "M";
-    case Key::N: return stream << "N";
-    case Key::O: return stream << "O";
-    case Key::P: return stream << "P";
-    case Key::Q: return stream << "Q";
-    case Key::R: return stream << "R";
-    case Key::S: return stream << "S";
-    case Key::T: return stream << "T";
-    case Key::U: return stream << "U";
-    case Key::V: return stream << "V";
-    case Key::W: return stream << "W";
-    case Key::X: return stream << "X";
-    case Key::Y: return stream << "Y";
-    case Key::Z: return stream << "Z";
-
-    case Key::F1: return stream << "F1";
-    case Key::F2: return stream << "F2";
-    case Key::F3: return stream << "F3";
-    case Key::F4: return stream << "F4";
-    case Key::F5: return stream << "F5";
-    case Key::F6: return stream << "F6";
-    case Key::F7: return stream << "F7";
-    case Key::F8: return stream << "F8";
-    case Key::F9: return stream << "F9";
-    case Key::F10: return stream << "F10";
-    case Key::F11: return stream << "F11";
-    case Key::F12: return stream << "F12";
-    case Key::F13: return stream << "F13";
-    case Key::F14: return stream << "F14";
-    case Key::F15: return stream << "F15";
-    case Key::F16: return stream << "F16";
-    case Key::F17: return stream << "F17";
-    case Key::F18: return stream << "F18";
-    case Key::F19: return stream << "F19";
-    case Key::F20: return stream << "F20";
-    case Key::F21: return stream << "F21";
-    case Key::F22: return stream << "F22";
-    case Key::F23: return stream << "F23";
-    case Key::F24: return stream << "F24";
-
-    default: return stream << "Unknown";
-    }
+    return stream << KeyNameMap::get_name(key);
 }
 
 } // namespace keyboard
