@@ -12,7 +12,7 @@ public:
     MouseDevice() = default;
 
 public:
-    MouseEventSignal::SignalInterface mouse_event() override {
+    MouseEventSignal::Interface mouse_event() override {
         return mouse_event_.signal_interface();
     }
 

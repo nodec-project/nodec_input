@@ -45,7 +45,7 @@ public:
     Keyboard() = default;
 
 public:
-    virtual KeyEventSignal::SignalInterface key_event() = 0;
+    virtual KeyEventSignal::Interface key_event() = 0;
 
 private:
     NODEC_DISABLE_COPY(Keyboard)

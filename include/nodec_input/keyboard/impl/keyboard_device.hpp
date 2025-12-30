@@ -13,7 +13,7 @@ public:
     KeyboardDevice() = default;
 
 public:
-    KeyEventSignal::SignalInterface key_event() {
+    KeyEventSignal::Interface key_event() override {
         return key_event_.signal_interface();
     }
 

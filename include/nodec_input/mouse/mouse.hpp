@@ -66,7 +66,7 @@ public:
     Mouse() = default;
 
 public:
-    virtual MouseEventSignal::SignalInterface mouse_event() = 0;
+    virtual MouseEventSignal::Interface mouse_event() = 0;
     virtual void warp_cursor_position(const nodec::Vector2f &position) = 0;
     virtual void set_cursor_visible(bool visible) = 0;
 
